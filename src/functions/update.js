@@ -27,7 +27,7 @@ export const handler = async (event) => {
     
     // Add fields to update expression if they're provided
     if (data.name !== undefined) {
-      updateExpression += ', #name = :name';
+      updateExpression += ', name = :name';
       expressionAttributeValues[':name'] = data.name;
     }
     
