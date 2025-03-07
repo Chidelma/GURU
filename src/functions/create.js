@@ -6,7 +6,7 @@ export const handler = async (event) => {
   try {
     const data = JSON.parse(event.body || '{}');
     
-    if (!data.name || !data.price || !data.category) {
+    if (!data.productName || !data.price || !data.category) {
       return formatJSONResponse(400, {
         message: 'Missing required fields: name, price, and category are required'
       });

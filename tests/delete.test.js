@@ -1,4 +1,4 @@
-import { describe, test, expect, beforeEach, mock } from "bun:test";
+import { describe, test, expect, mock } from "bun:test";
 import { handler } from '../src/functions/delete.js';
 import { dynamoDb } from '../src/libs/dynamodb.js';
 
@@ -8,7 +8,7 @@ const id = Bun.randomUUIDv7()
 mock.module('../src/libs/dynamodb.js', () => ({
   dynamoDb: {
     get: mock().mockImplementation(() => Promise.resolve({
-      Item: {
+      Items: {
         id,
         productName: 'Coffee to Delete'
       }
@@ -63,7 +63,7 @@ describe('Delete Menu Item Handler', () => {
     mock.module('../src/libs/dynamodb.js', () => ({
       dynamoDb: {
         get: mock().mockImplementation(() => Promise.resolve({
-          Item: { id, productName: 'Coffee to Delete' }
+          Items: { id, productName: 'Coffee to Delete' }
         })),
         delete: mock().mockImplementation(() => Promise.reject(new Error('Database error')))
       }

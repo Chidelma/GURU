@@ -22,7 +22,7 @@ const id = data.menuItem.id
 res = await fetch(`${process.env.API_URL}/${id}`, {
     method: 'PUT',
     body: JSON.stringify({
-        name: "Iced Capp"
+        productName: "Iced Capp"
     })
 })
 

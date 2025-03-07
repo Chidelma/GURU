@@ -18,7 +18,7 @@ const sampleMenuItem = {
 mock.module('../src/libs/dynamodb.js', () => ({
   dynamoDb: {
     get: mock().mockImplementation(() => Promise.resolve({
-      Item: sampleMenuItem
+      Items: sampleMenuItem
     }))
   }
 }));
