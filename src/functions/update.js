@@ -13,7 +13,7 @@ export const handler = async (event) => {
     // First check if the item exists
     const existingItem = await dynamoDb.get(id);
     
-    if (!existingItem.menuItem) {
+    if (!existingItem.Items) {
       return formatJSONResponse(404, { message: 'Menu item not found' });
     }
     
