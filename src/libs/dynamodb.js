@@ -1,5 +1,5 @@
-import { DynamoDBClient, GetItemCommand, ScanCommand, PutItemCommand, UpdateItemCommand, DeleteItemCommand } from "@aws-sdk/client-dynamodb";
-import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
+import { DynamoDBClient, ScanCommand } from "@aws-sdk/client-dynamodb";
+import { DynamoDBDocumentClient, DeleteCommand, PutCommand, QueryCommand, UpdateCommand } from "@aws-sdk/lib-dynamodb";
 
 const client = new DynamoDBClient({ region: 'ca-central-1' });
 const dbDocClient = DynamoDBDocumentClient.from(client)
@@ -7,15 +7,14 @@ const menuItemsTable = process.env.MENU_ITEMS_TABLE;
 
 export const dynamoDb = {
   get: async (id) => {
-    const command = new GetItemCommand({
+    const command = new QueryCommand({
       TableName: menuItemsTable,
-      Key: { 
-        id: {
-            'S': id
-          } 
-        },
+      KeyConditionExpression: "id = :id",
+      ExpressionAttributeValues: {
+        ":id": id,
+      },
     });
-    return await client.send(command);
+    return await dbDocClient.send(command);
   },
 
   scan: async () => {
@@ -24,7 +23,7 @@ export const dynamoDb = {
   },
 
   create: async (item) => {
-    const command = new PutItemCommand({
+    const command = new PutCommand({
       TableName: menuItemsTable,
       Item: item,
     });
@@ -32,29 +31,21 @@ export const dynamoDb = {
   },
 
   update: async (id, updateExpression, expressionValues) => {
-    const command = new UpdateItemCommand({
+    const command = new UpdateCommand({
       TableName: menuItemsTable,
-      Key: { 
-        id: {
-            'S': id
-            } 
-        },
+      Key: { id },
       UpdateExpression: updateExpression,
       ExpressionAttributeValues: expressionValues,
       ReturnValues: "ALL_NEW",
     });
-    return await client.send(command);
+    return await dbDocClient.send(command);
   },
 
   delete: async (id) => {
-    const command = new DeleteItemCommand({
+    const command = new DeleteCommand({
       TableName: menuItemsTable,
-      Key: { 
-        id: {
-            'S': id
-            } 
-        },
+      Key: { id },
     });
-    return await client.send(command);
+    return await dbDocClient.send(command);
   },
 };
