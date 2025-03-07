@@ -17,6 +17,9 @@ jobs:
         
     - name: Install dependencies
       run: bun install
+
+    - name: Run tests
+      run: bun test
     
     - name: Determine stage
       id: determine-stage

@@ -10,7 +10,7 @@ export const dynamoDb = {
       Key: { 
         id: {
             'S': id
-            } 
+          } 
         },
     });
     return await client.send(command);
@@ -26,7 +26,7 @@ export const dynamoDb = {
       TableName: menuItemsTable,
       Item: item,
     });
-    return await client.send(command);
+    await client.send(command);
   },
 
   update: async (id, updateExpression, expressionValues) => {
