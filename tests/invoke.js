@@ -1,6 +1,6 @@
 let res = await fetch(`${process.env.API_URL}`)
 
-console.log(await res.text())
+console.log("Retrieve All", await res.text())
 
 res = await fetch(`${process.env.API_URL}`, {
     method: 'POST',
@@ -15,8 +15,6 @@ res = await fetch(`${process.env.API_URL}`, {
 
 const data = await res.json()
 
-console.log(data)
-
 const id = data.menuItem.id
 
 res = await fetch(`${process.env.API_URL}/${id}`, {
@@ -26,11 +24,14 @@ res = await fetch(`${process.env.API_URL}/${id}`, {
     })
 })
 
-console.log(await res.text())
+console.log("Update", await res.text())
 
 res = await fetch(`${process.env.API_URL}/${id}`, {
     method: 'DELETE'
 })
 
-console.log(await res.text())
+console.log("Delete", res.status)
 
+res = await fetch(`${process.env.API_URL}/${id}`)
+
+console.log("Retrieve", res.status)

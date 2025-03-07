@@ -25,7 +25,7 @@ Menu Item:
 ```json
 {
   "id": "uuid",
-  "name": "string",
+  "productName": "string",
   "description": "string",
   "price": "number",
   "category": "string",
@@ -33,3 +33,6 @@ Menu Item:
   "createdAt": "string (ISO date)",
   "updatedAt": "string (ISO date)"
 }
+```
+
+Here is a [Loom Video](https://www.loom.com/share/141d5f8095f14072ac1118a935be9143?sid=9a1d094d-3eed-46f8-a08f-140492858f37) explaining the soluition
