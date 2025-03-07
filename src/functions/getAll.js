@@ -1,5 +1,5 @@
-import { dynamoDb } from '../libs/dynamodb';
-import { formatJSONResponse } from '../libs/apiGateway';
+import { dynamoDb } from '../libs/dynamodb.js';
+import { formatJSONResponse } from '../libs/apiGateway.js';
 
 export const handler = async () => {
   try {
