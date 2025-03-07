@@ -8,7 +8,7 @@ const IdAll = Bun.randomUUIDv7()
 mock.module('../src/libs/dynamodb.js', () => ({
   dynamoDb: {
     get: mock().mockImplementation(() => Promise.resolve({
-      Item: {
+      Items: {
         id: IdAll,
         name: 'Original Coffee',
         description: 'Original description',
@@ -122,7 +122,7 @@ describe('Update Menu Item Handler', () => {
     mock.module('../src/libs/dynamodb.js', () => ({
       dynamoDb: {
         get: mock().mockImplementation(() => Promise.resolve({
-          Item: { id: IdAll, name: 'Original Coffee' }
+          Items: { id: IdAll, name: 'Original Coffee' }
         })),
         update: mock().mockImplementation(() => Promise.reject(new Error('Database error')))
       }
