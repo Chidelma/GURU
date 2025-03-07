@@ -1,6 +1,8 @@
 import { DynamoDBClient, GetItemCommand, ScanCommand, PutItemCommand, UpdateItemCommand, DeleteItemCommand } from "@aws-sdk/client-dynamodb";
+import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 
-const client = new DynamoDBClient({});
+const client = new DynamoDBClient({ region: 'ca-central-1' });
+const dbDocClient = DynamoDBDocumentClient.from(client)
 const menuItemsTable = process.env.MENU_ITEMS_TABLE;
 
 export const dynamoDb = {
@@ -26,7 +28,7 @@ export const dynamoDb = {
       TableName: menuItemsTable,
       Item: item,
     });
-    await client.send(command);
+    await dbDocClient.send(command);
   },
 
   update: async (id, updateExpression, expressionValues) => {
