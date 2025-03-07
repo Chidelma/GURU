@@ -1,18 +1,65 @@
-# "org" ensures this Service is used with the correct Serverless Framework Access Key.
-org: chidelma
-# "app" enables Serverless Framework Dashboard features and sharing them with other Services.
-app: crud
-# "service" is the name of this project. This will also be added to your AWS resource names.
-service: GURU
+service: coffee-guru
+
+frameworkVersion: '3'
 
 provider:
   name: aws
   runtime: nodejs20.x
+  stage: ${opt:stage, 'dev'}
+  region: ${opt:region, 'ca-central-1'}
+  environment:
+    MENU_ITEMS_TABLE: ${self:service}-menu-items-${self:provider.stage}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: !GetAtt MenuItemsTable.Arn
 
 functions:
-  hello:
-    handler: handler.hello
+  createMenuItem:
+    handler: src/functions/create.handler
     events:
-      - httpApi:
-          path: /
+      - http:
+          path: menu-items
+          method: post
+          cors: true
+
+  getMenuItems:
+    handler: src/functions/getAll.handler
+    events:
+      - http:
+          path: menu-items
           method: get
+          cors: true
+
+  getMenuItem:
+    handler: src/functions/getById.handler
+    events:
+      - http:
+          path: menu-items/{id}
+          method: get
+          cors: true
+
+  updateMenuItem:
+    handler: src/functions/update.handler
+    events:
+      - http:
+          path: menu-items/{id}
+          method: put
+          cors: true
+
+  deleteMenuItem:
+    handler: src/functions/delete.handler
+    events:
+      - http:
+          path: menu-items/{id}
+          method: delete
+          cors: true
+
+resources:
+  - ${file(resources/dynamodb-tables.yml)}

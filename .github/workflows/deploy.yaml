@@ -1,0 +1,36 @@
+name: Deploy Coffee Shop API
+
+on:
+  push:
+    branches:
+      - staging
+      - main
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+        
+    steps:
+    - uses: actions/checkout@v4
+    - uses: oven-sh/setup-bun@v2
+        
+    - name: Install dependencies
+      run: bun install
+    
+    - name: Determine stage
+      id: determine-stage
+      run: |
+        if [ "${{ github.ref }}" = "refs/heads/main" ]; then
+          echo "::set-output name=stage::prod"
+        else
+          echo "::set-output name=stage::dev"
+        fi
+    
+    - name: Serverless deploy
+      uses: serverless/github-action@v3.2
+      with:
+        args: deploy --stage ${{ steps.determine-stage.outputs.stage }}
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

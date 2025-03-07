@@ -1,0 +1,19 @@
+{
+  "name": "coffee-guru",
+  "version": "1.0.0",
+  "description": "Coffee Shop Menu Management API",
+  "scripts": {
+    "deploy:dev": "serverless deploy --stage dev",
+    "deploy:prod": "serverless deploy --stage prod"
+  },
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "3.758.0",
+    "uuid": "11.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.12",
+    "@types/bun": "^1.2.4",
+    "serverless": "^3.0.0",
+    "typescript": "^5.8.2"
+  }
+}
