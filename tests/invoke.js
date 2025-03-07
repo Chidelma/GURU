@@ -5,7 +5,7 @@ console.log(await res.text())
 res = await fetch(`${process.env.API_URL}`, {
     method: 'POST',
     body: JSON.stringify({
-        name: 'Cappuccino',
+        productName: 'Cappuccino',
         description: 'Classic Italian coffee drink',
         price: 4.99,
         category: 'Coffee',

@@ -10,7 +10,7 @@ mock.module('../src/libs/dynamodb.js', () => ({
     get: mock().mockImplementation(() => Promise.resolve({
       Item: {
         id,
-        name: 'Coffee to Delete'
+        productName: 'Coffee to Delete'
       }
     })),
     delete: mock().mockImplementation(() => Promise.resolve({}))
@@ -63,7 +63,7 @@ describe('Delete Menu Item Handler', () => {
     mock.module('../src/libs/dynamodb.js', () => ({
       dynamoDb: {
         get: mock().mockImplementation(() => Promise.resolve({
-          Item: { id, name: 'Coffee to Delete' }
+          Item: { id, productName: 'Coffee to Delete' }
         })),
         delete: mock().mockImplementation(() => Promise.reject(new Error('Database error')))
       }

@@ -11,11 +11,11 @@ export const handler = async (event) => {
     
     const result = await dynamoDb.get(id);
     
-    if (!result.Item) {
+    if (!result.Items) {
       return formatJSONResponse(404, { message: 'Menu item not found' });
     }
     
-    return formatJSONResponse(200, { menuItem: result.Item });
+    return formatJSONResponse(200, { menuItem: result.Items });
   } catch (error) {
     console.error('ERROR:', error);
     return formatJSONResponse(500, { message: 'Failed to fetch menu item' });

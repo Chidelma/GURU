@@ -16,7 +16,7 @@ export const handler = async (event) => {
     
     const menuItem = {
       id: uuidv7(),
-      name: data.name,
+      productName: data.productName,
       description: data.description || '',
       price: data.price,
       category: data.category,

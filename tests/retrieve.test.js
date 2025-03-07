@@ -5,7 +5,7 @@ import { dynamoDb } from '../src/libs/dynamodb.js';
 // Sample menu item for testing
 const sampleMenuItem = {
   id: 'item-1',
-  name: 'Espresso',
+  productName: 'Espresso',
   description: 'Strong coffee',
   price: 2.99,
   category: 'Coffee',
@@ -45,7 +45,7 @@ describe('Get Menu Item By ID Handler', () => {
     expect(responseBody).toHaveProperty('menuItem');
     expect(responseBody.menuItem).toEqual(sampleMenuItem);
     expect(responseBody.menuItem.id).toBe('item-1');
-    expect(responseBody.menuItem.name).toBe('Espresso');
+    expect(responseBody.menuItem.productName).toBe('Espresso');
     expect(responseBody.menuItem.price).toBe(2.99);
   });
 

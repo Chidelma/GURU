@@ -10,7 +10,7 @@ mock.module('../src/libs/dynamodb.js', () => ({
     get: mock().mockImplementation(() => Promise.resolve({
       Items: {
         id: IdAll,
-        name: 'Original Coffee',
+        productName: 'Original Coffee',
         description: 'Original description',
         price: 3.99,
         category: 'Coffee',
@@ -22,7 +22,7 @@ mock.module('../src/libs/dynamodb.js', () => ({
     update: mock().mockImplementation(() => Promise.resolve({
       Attributes: {
         id: IdAll,
-        name: 'Updated Coffee',
+        productName: 'Updated Coffee',
         description: 'Updated description',
         price: 4.99,
         category: 'Coffee',
@@ -41,7 +41,7 @@ describe('Update Menu Item Handler', () => {
     const event = {
       pathParameters: { id: IdAll },
       body: JSON.stringify({
-        name: 'Updated Coffee',
+        productName: 'Updated Coffee',
         description: 'Updated description',
         price: 4.99
       })
@@ -57,7 +57,7 @@ describe('Update Menu Item Handler', () => {
     expect(dynamoDb.update).toHaveBeenCalledTimes(1);
     
     // Check updated properties
-    expect(responseBody.menuItem.name).toBe('Updated Coffee');
+    expect(responseBody.menuItem.productName).toBe('Updated Coffee');
     expect(responseBody.menuItem.description).toBe('Updated description');
     expect(responseBody.menuItem.price).toBe(4.99);
   });
@@ -67,7 +67,7 @@ describe('Update Menu Item Handler', () => {
     const event = {
       pathParameters: undefined,
       body: JSON.stringify({
-        name: 'Updated Coffee'
+        productName: 'Updated Coffee'
       })
     };
 
@@ -86,7 +86,7 @@ describe('Update Menu Item Handler', () => {
     const event = {
       pathParameters: { id: Bun.randomUUIDv7() },
       body: JSON.stringify({
-        name: 'Updated Coffee'
+        productName: 'Updated Coffee'
       })
     };
     
@@ -114,7 +114,7 @@ describe('Update Menu Item Handler', () => {
     const event = {
       pathParameters: { id: IdAll },
       body: JSON.stringify({
-        name: 'Updated Coffee'
+        productName: 'Updated Coffee'
       })
     };
     
@@ -122,7 +122,7 @@ describe('Update Menu Item Handler', () => {
     mock.module('../src/libs/dynamodb.js', () => ({
       dynamoDb: {
         get: mock().mockImplementation(() => Promise.resolve({
-          Items: { id: IdAll, name: 'Original Coffee' }
+          Items: { id: IdAll, productName: 'Original Coffee' }
         })),
         update: mock().mockImplementation(() => Promise.reject(new Error('Database error')))
       }

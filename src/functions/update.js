@@ -26,9 +26,9 @@ export const handler = async (event) => {
     };
     
     // Add fields to update expression if they're provided
-    if (data.name !== undefined) {
-      updateExpression += ', name = :name';
-      expressionAttributeValues[':name'] = data.name;
+    if (data.productName !== undefined) {
+      updateExpression += ', productName = :name';
+      expressionAttributeValues[':name'] = data.productName;
     }
     
     if (data.description !== undefined) {

@@ -25,7 +25,7 @@ describe('Create Menu Item Handler', () => {
     // Arrange
     const event = {
       body: JSON.stringify({
-        name: 'Cappuccino',
+        productName: 'Cappuccino',
         description: 'Classic Italian coffee drink',
         price: 4.99,
         category: 'Coffee',
@@ -43,7 +43,7 @@ describe('Create Menu Item Handler', () => {
     
     // Check item properties
     expect(responseBody.menuItem.id).toBeTruthy();
-    expect(responseBody.menuItem.name).toBe('Cappuccino');
+    expect(responseBody.menuItem.productName).toBe('Cappuccino');
     expect(responseBody.menuItem.description).toBe('Classic Italian coffee drink');
     expect(responseBody.menuItem.price).toBe(4.99);
     expect(responseBody.menuItem.category).toBe('Coffee');
@@ -56,7 +56,7 @@ describe('Create Menu Item Handler', () => {
     // Arrange
     const event = {
       body: JSON.stringify({
-        name: 'Espresso',
+        productName: 'Espresso',
         price: 3.99,
         category: 'Coffee'
       })
@@ -68,7 +68,7 @@ describe('Create Menu Item Handler', () => {
     
     // Assert
     expect(response.statusCode).toBe(201);
-    expect(responseBody.menuItem.name).toBe('Espresso');
+    expect(responseBody.menuItem.productName).toBe('Espresso');
     expect(responseBody.menuItem.price).toBe(3.99);
     expect(responseBody.menuItem.category).toBe('Coffee');
     // Default values
@@ -76,7 +76,7 @@ describe('Create Menu Item Handler', () => {
     expect(responseBody.menuItem.isAvailable).toBe(true);
   });
 
-  test('should return 400 if name is missing', async () => {
+  test('should return 400 if productName is missing', async () => {
     // Arrange
     const event = {
       body: JSON.stringify({
@@ -98,7 +98,7 @@ describe('Create Menu Item Handler', () => {
     // Arrange
     const event = {
       body: JSON.stringify({
-        name: 'Latte',
+        productName: 'Latte',
         category: 'Coffee'
       })
     };
@@ -115,7 +115,7 @@ describe('Create Menu Item Handler', () => {
     // Arrange
     const event = {
       body: JSON.stringify({
-        name: 'Latte',
+        productName: 'Latte',
         price: 4.99
       })
     };
@@ -132,7 +132,7 @@ describe('Create Menu Item Handler', () => {
     // Arrange
     const event = {
       body: JSON.stringify({
-        name: 'Cappuccino',
+        productName: 'Cappuccino',
         price: 4.99,
         category: 'Coffee'
       })

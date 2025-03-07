@@ -6,7 +6,7 @@ import { dynamoDb } from '../src/libs/dynamodb.js';
 const sampleMenuItems = [
   {
     id: 'item-1',
-    name: 'Espresso',
+    productName: 'Espresso',
     description: 'Strong coffee',
     price: 2.99,
     category: 'Coffee',
@@ -16,7 +16,7 @@ const sampleMenuItems = [
   },
   {
     id: 'item-2',
-    name: 'Latte',
+    productName: 'Latte',
     description: 'Coffee with milk',
     price: 3.99,
     category: 'Coffee',
@@ -26,7 +26,7 @@ const sampleMenuItems = [
   },
   {
     id: 'item-3',
-    name: 'Croissant',
+    productName: 'Croissant',
     description: 'Buttery pastry',
     price: 2.50,
     category: 'Pastry',
@@ -67,9 +67,9 @@ describe('Get All Menu Items Handler', () => {
     expect(responseBody.menuItems).toHaveLength(3);
     
     // Check that items are returned correctly
-    expect(responseBody.menuItems[0].name).toBe('Espresso');
-    expect(responseBody.menuItems[1].name).toBe('Latte');
-    expect(responseBody.menuItems[2].name).toBe('Croissant');
+    expect(responseBody.menuItems[0].productName).toBe('Espresso');
+    expect(responseBody.menuItems[1].productName).toBe('Latte');
+    expect(responseBody.menuItems[2].productName).toBe('Croissant');
   });
 
   test('should handle empty items list', async () => {
